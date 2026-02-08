@@ -1,0 +1,103 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+def generar_dashboard_unach():
+    # Estilo visual profesional
+    plt.style.use('ggplot')
+
+    # ---------------------------------------------------------
+    # DATASET: Resultados de 36 estudiantes - Investigación UNACH
+    # ---------------------------------------------------------
+    data = {
+        "Tipos de IA utilizados": {
+            "labels": ["ChatGPT", "Copilot", "Canva IA", "Otros"],
+            "values": [45, 25, 20, 10],
+            "tipo": "pie"
+        },
+        "Frecuencia de uso de IA": {
+            "labels": ["Nunca", "Rara vez", "Frecuentemente", "Siempre"],
+            "values": [41.7, 50, 5, 3.3],
+            "tipo": "bar"
+        },
+        "Cursos que incluyen Ética": {
+            "labels": ["Metodología", "Ninguno", "IA", "Ética Prof.", "Varios"],
+            "values": [33.3, 25, 22.2, 13.9, 5.6],
+            "tipo": "bar"
+        },
+        "Principios Éticos Prioritarios": {
+            "labels": ["Responsabilidad", "Privacidad", "Transparencia", "Seguridad"],
+            "values": [36.1, 30.6, 22.2, 11.1],
+            "tipo": "pie"
+        },
+        "Conocimiento sobre Privacidad": {
+            "labels": ["Conoce", "No conoce", "Incierto"],
+            "values": [28, 62, 10],
+            "tipo": "pie"
+        },
+        "Dilema: Ética vs Eficiencia": {
+            "labels": ["Prioriza Ética", "Prioriza Eficiencia", "Equilibrio"],
+            "values": [65, 25, 10],
+            "tipo": "barh"
+        },
+        "Orientación Formal sobre IA": {
+            "labels": ["Sí", "No"],
+            "values": [15, 85],
+            "tipo": "pie"
+        },
+        "Dilemas Éticos enfrentados": {
+            "labels": ["Ha tenido", "No ha tenido"],
+            "values": [20, 80],
+            "tipo": "pie"
+        },
+        "Responsabilidad Social en IA": {
+            "labels": ["Desarrolladores", "Usuarios", "Gobierno", "Institución"],
+            "values": [40, 30, 20, 10],
+            "tipo": "bar"
+        },
+        "Mensaje principal sobre Ética": {
+            "labels": ["Ética Vital", "Uso Crítico", "Protección Datos"],
+            "values": [50, 30, 20],
+            "tipo": "pie"
+        }
+    }
+
+    # Crear Dashboard (5 filas x 2 columnas)
+    fig, axs = plt.subplots(5, 2, figsize=(18, 25))
+    fig.suptitle(
+        'RESULTADOS INVESTIGACIÓN FORMATIVA:\nÉTICA, PRIVACIDAD Y RESPONSABILIDAD SOCIAL EN IA - UNACH',
+        fontsize=22,
+        fontweight='bold'
+    )
+
+    axs = axs.flatten()
+
+    # Generación automática de gráficos
+    for ax, (titulo, info) in zip(axs, data.items()):
+        if info["tipo"] == "pie":
+            ax.pie(
+                info["values"],
+                labels=info["labels"],
+                autopct='%1.1f%%',
+                startangle=140,
+                shadow=True
+            )
+
+        elif info["tipo"] == "bar":
+            ax.bar(info["labels"], info["values"])
+            ax.set_ylim(0, 100)
+            ax.set_ylabel("Porcentaje (%)")
+            ax.tick_params(axis='x', rotation=20)
+
+        elif info["tipo"] == "barh":
+            ax.barh(info["labels"], info["values"])
+            ax.set_xlim(0, 100)
+            ax.set_xlabel("Porcentaje (%)")
+
+        ax.set_title(titulo, fontweight='bold')
+
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    print("Generando dashboard de resultados...")
+    plt.show()
+if __name__ == "__main__":
+    generar_dashboard_unach()
+
